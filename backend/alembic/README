@@ -1,0 +1,3 @@
+To create and apply migrations 
+alembic revision --autogenerate -m migration_msg
+alembic upgrade head
