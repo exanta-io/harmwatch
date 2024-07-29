@@ -34,7 +34,10 @@ if (typeof window !== 'undefined') {
       password === process.env.NEXT_PUBLIC_PASSWORD
     ) {
       document.cookie = `currentUserHash=${process.env.NEXT_PUBLIC_HASH}`;
-      router.push('/conversations');
+      setTimeout(() => {
+        router.refresh();
+       
+      }, 100);
       return;
     } else {
       setHasErrors(true);
