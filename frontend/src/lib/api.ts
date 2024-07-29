@@ -10,13 +10,13 @@ export const fetchSideBarConversations = async (): Promise<SidebarEntry[]> => {
     chatId: string,
   ): Promise<Conversation> => {
     const { data } = await request.get(
-      `/conversations/${chatId}/`,
+      `/conversations/${chatId}`,
     );
    return data;
   };
 
   export const fetchChatQuery = async (chatID: string, query: string) => {
-    const response = await request.get(`/conversations/${chatID}/chat?query_request=${query}`);
+    const response = await request.get(`/conversations/${chatID}/chat/?query_request=${query}`);
 
     if (response.status !== 200) {
       throw new Error('Network response was not ok');
@@ -25,24 +25,24 @@ export const fetchSideBarConversations = async (): Promise<SidebarEntry[]> => {
   };
 
   export const deleteConversation = async (chatID: string) => {
-    const response = await request.delete(`/conversations/${chatID}/`);
+    const response = await request.delete(`/conversations/${chatID}`);
     return response;
   };
 
 
 export const fetchDocumentList= async (): Promise<Document[]> => {
-  const response = await request.get('/documents');
+  const response = await request.get('/documents/');
   return response.data.documents;
 }
 
 
 export const createConversation = async (data: ConversationCreate) => {
-  const { data: responseData } = await request.post(`/conversations/`, data);
+  const { data: responseData } = await request.post(`/conversations`, data);
   return responseData;
 };
 
 export const uploadDocument = async (formData: FormData) => {
-  const response = await request.post('/upload', formData, {
+  const response = await request.post('/upload/', formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
@@ -51,7 +51,7 @@ export const uploadDocument = async (formData: FormData) => {
 };
 
 export const updateConversation = async (chatID: string, data: ConversationUpdate) => {
-  const response = await request.put(`/conversations/${chatID}/`, data);
+  const response = await request.put(`/conversations/${chatID}`, data);
   return response;
 }
 
