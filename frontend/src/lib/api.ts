@@ -16,7 +16,7 @@ export const fetchSideBarConversations = async (): Promise<SidebarEntry[]> => {
   };
 
   export const fetchChatQuery = async (chatID: string, query: string) => {
-    const response = await request.get(`/conversations/${chatID}/chat/?query_request=${query}`);
+    const response = await request.get(`/conversations/${chatID}/chat?query_request=${query}`);
 
     if (response.status !== 200) {
       throw new Error('Network response was not ok');
@@ -31,7 +31,7 @@ export const fetchSideBarConversations = async (): Promise<SidebarEntry[]> => {
 
 
 export const fetchDocumentList= async (): Promise<Document[]> => {
-  const response = await request.get('/documents/');
+  const response = await request.get('/documents');
   return response.data.documents;
 }
 
@@ -42,7 +42,7 @@ export const createConversation = async (data: ConversationCreate) => {
 };
 
 export const uploadDocument = async (formData: FormData) => {
-  const response = await request.post('/upload/', formData, {
+  const response = await request.post('/upload', formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
